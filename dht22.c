@@ -1,26 +1,13 @@
 /*Raspberry Pi with WiringPi
  * Author: MrPoudel
  * Version: 0.1.0
- * https://github.com/
+ * https://github.com/MrPoudel/dht22-opcua
  */
 
 #include <signal.h>
 #include <pthread.h>
 #include "open62541.h"
 #include "gpio_read.h"
-//terminate the server by pressing ctrl+c
-//extern const unsigned short signal_gpio;
-//extern unsigned short data[5];
-
-//float humidity;
-//float celsius;
-//float fahrenheit;
-//short checksum;
-
-//extern short readData();
-//extern void *threadFunc(void* arg);
-
-
 
 UA_Boolean running = true;
 static void stopHandler(int sign) {
@@ -84,7 +71,6 @@ static void addVariable_humidity(UA_Server *server) {
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);
 }
 
-
 int main(void)
 {
   pthread_t pth;
@@ -103,11 +89,11 @@ int main(void)
   
   //add a method that will  update the opc ua variables in it's address space
  
- UA_Server_addRepeatedCallback(server, connectToSensorData, NULL, 1000, NULL); //call every 1 sec
- UA_StatusCode retval = UA_Server_run(server, &running);
- UA_Server_delete(server);
- UA_ServerConfig_delete(config);
-// pthread_join(pth, NULL);
+  UA_Server_addRepeatedCallback(server, connectToSensorData, NULL, 1000, NULL); //call every 1 sec
+  UA_StatusCode retval = UA_Server_run(server, &running);
+  UA_Server_delete(server);
+  UA_ServerConfig_delete(config);
+  // pthread_join(pth, NULL);
 
  return (int)retval; 
 
