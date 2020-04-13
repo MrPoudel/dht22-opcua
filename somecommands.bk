@@ -1,0 +1,2 @@
+// Upgrading the latest version of the npm
+npm install npm@latest -g
