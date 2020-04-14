@@ -1,2 +1,8 @@
 // Upgrading the latest version of the npm
 npm install npm@latest -g
+
+// Used ports in the ubuntu
+sudo lsof -i -P -n | grep LISTEN
+
+// ports used by the node application
+ps aux | grep node
