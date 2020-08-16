@@ -24,3 +24,16 @@ network={
 2. Generate the psk with command :sudo wpa_passphrase "SSID" "secret_password" >> /etc/wpa_supplicant/wpa_supplicant.conf
 
 // Static ip to raspberry pi
+
+1.  ip r | grep default
+default via ROUTER_IP dev NETWORK proto dhcp src STATIC_IP metric 202
+2. sudo nano /etc/resolv.conf
+nameserver SNSIP
+3. sudo nano /etc/dhcpcd.conf
+
+interface <NETWORK>
+static ip_address=<STATIC_IP>/24
+static routers=<ROUTER_IP>
+static domain_name_servers=<DNSIP>
+4. sudo reboot
+
