@@ -6,3 +6,20 @@ sudo lsof -i -P -n | grep LISTEN
 
 // ports used by the node application
 ps aux | grep node
+
+// Connect raspberry pi to WIFI automatically
+There are two ways:
+
+1. sudo raspi-config 
+and then configure the wifi by providing ssid and password
+This will make a new entry in /etc/wpa_supplicant/wpa_supplicant.conf like this:
+
+network={
+        ssid="SSID"
+        #psk="secret_password"
+        psk=abcdtopsecret1234
+}
+
+2. Generate the psk with command :sudo wpa_passphrase "SSID" "secret_password" >> /etc/wpa_supplicant/wpa_supplicant.conf
+
+// Static ip to raspberry pi
