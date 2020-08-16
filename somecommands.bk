@@ -8,6 +8,7 @@ sudo lsof -i -P -n | grep LISTEN
 ps aux | grep node
 
 // Connect raspberry pi to WIFI automatically
+// SSID should bot contain special characters like !, $ , ^ etc. at least did not work for me
 There are two ways:
 
 1. sudo raspi-config 
