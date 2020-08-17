@@ -1,3 +1,4 @@
+# First make sure that the tool chain is downloaded from  https://github.com/raspberrypi/tools.git
 mkdir build && cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=Toolchain-rpi.cmake
 make
