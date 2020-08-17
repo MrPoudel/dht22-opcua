@@ -1,0 +1,6 @@
+mkdir build && cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=Toolchain-rpi.cmake
+make
+
+# Transfer the executable to the RasPi
+# scp [source files] [user]@[host]:[path]
