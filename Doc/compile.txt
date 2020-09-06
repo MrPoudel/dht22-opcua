@@ -66,9 +66,12 @@ cmake_project: ## Build the project
 	cd $(BUILD_DIR) && \
 	cmake .. $(PROJECT_FLAGS) $(DEBUG) && \
         make
-
+	
 cmake_flash: ## Transfer the executable to target
-	scp $(BUILD_DIR)/main user@host:~/  
+	#scp $(BUILD_DIR)/main user@host:~/
+	chmod a+x create_systemd_service.sh  
+	./create_systemd_service.sh
+
   
 .PHONY: clean  
 clean: ## Delete all build configurations
