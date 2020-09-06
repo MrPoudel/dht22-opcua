@@ -38,3 +38,38 @@ set(COMPILER_FLAGS " -march=armv7-a -marm -mfpu=neon  -mfloat-abi=hard -mcpu=cor
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMPILER_FLAGS}" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILER_FLAGS}" CACHE STRING "" FORCE)
 
+
+# This is the content of makefile
+ ubuntu@ubuntu$ cat Makefile 
+# This is the content of makefile
+export SYSROOTS=/opt/poky/3.1+snapshot/sysroots
+
+# cmake
+DEBUG        = -DCMAKE_BUILD_TYPE=Debug
+RELEASE      = -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+# flags
+PROJECT_FLAGS = -DCMAKE_TOOLCHAIN_FILE=CMake/Toolchain/OEToolchainConfig.cmake
+
+# build directory
+BUILD_DIR = build
+
+.PHONY : help  
+## ----------------------------------------------------------------------
+## This is a help comment. It displays all the available targets.
+## ----------------------------------------------------------------------
+help: ## Show this help.
+	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
+
+cmake_project: ## Build the project
+	mkdir -p $(BUILD_DIR) && \
+	cd $(BUILD_DIR) && \
+	cmake .. $(PROJECT_FLAGS) $(DEBUG) && \
+  make
+
+cmake_flash: ## Transfer the executable to target
+	scp $(BUILD_DIR)/main user@host:~/  
+  
+.PHONY: clean  
+clean: ## Delete all build configurations
+	rm -rf $(BUILD_DIR)
