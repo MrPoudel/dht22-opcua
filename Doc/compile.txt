@@ -40,8 +40,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILER_FLAGS}" CACHE STRING "" FORCE
 
 
 # This is the content of makefile
- ubuntu@ubuntu$ cat Makefile 
-# This is the content of makefile
+
 export SYSROOTS=/opt/poky/3.1+snapshot/sysroots
 
 # cmake
@@ -58,6 +57,7 @@ BUILD_DIR = build
 ## ----------------------------------------------------------------------
 ## This is a help comment. It displays all the available targets.
 ## ----------------------------------------------------------------------
+
 help: ## Show this help.
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
 
@@ -65,14 +65,14 @@ cmake_project: ## Build the project
 	mkdir -p $(BUILD_DIR) && \
 	cd $(BUILD_DIR) && \
 	cmake .. $(PROJECT_FLAGS) $(DEBUG) && \
-        make
-	
-cmake_flash: ## Transfer the executable to target
-	#scp $(BUILD_DIR)/main user@host:~/
+    make
+cmake_flash: ## Transfer exe
+	 #scp $(BUILD_DIR)/main user@host:~/
+
+cmake_systemd_service: ## Transfer service file
 	chmod a+x create_systemd_service.sh  
 	./create_systemd_service.sh
-
-  
+	ssh -t pi@192.168.178.30 "sudo systemctl stop myservice.service"
 .PHONY: clean  
 clean: ## Delete all build configurations
 	rm -rf $(BUILD_DIR)
