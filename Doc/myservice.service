@@ -1,0 +1,24 @@
+# Start the daemon and see log using journalctl
+# OR list the active services...
+
+pi@raspberrypi:~ $ sudo systemctl daemon-reload
+pi@raspberrypi:~ $ sudo systemctl restart myservice
+pi@raspberrypi:~ $ sudo journalctl -f -a -umyservice
+
+## Contents of myservice:
+
+[Unit]
+Description=My Hello Service
+[Service]
+Type=simple
+ExecStart=/home/pi/test
+Restart=on-failure
+RestartSec=10
+KillMode=process
+[Install]
+WantedBy=multi-user.target
+
+
+## Note
+If the file that is to be executed is not present on the specified location pointed by myservice.service
+then the daemon will try again after 10 seconds. (ExecStart=10)
