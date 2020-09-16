@@ -1,6 +1,8 @@
 # Start the daemon and see log using journalctl
 # OR list the active services...
 
+pi@raspberrypi:~ $  sudo systemctl stop myservice
+pi@raspberrypi:~ $  sudo systemctl start myservice
 pi@raspberrypi:~ $ sudo systemctl daemon-reload
 pi@raspberrypi:~ $ sudo systemctl restart myservice
 pi@raspberrypi:~ $ sudo journalctl -f -a -umyservice
